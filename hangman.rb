@@ -3,18 +3,20 @@ class Hangman
   attr_reader :guessed_letters
 
   def initialize(word_hash)
-    @full_answer = word_hash[:word].chars
+    @full_answer = word_hash[:word].downcase.chars
     create_user_answer
     @guessed_letters = []
     @definition = word_hash[:definition]
     @example = word_hash[:example]
   end
 
-  def create_user_answer
+   def create_user_answer
     @user_answer = []
-    @user_answer << "_" * @full_answer.length
-    @user_answer = @user_answer.join("").split("")
+    matches = @full_answer.join('').tr('[a-zA-Z]','_')
+    @user_answer << matches
+    @user_answer = @user_answer.first.split("")
   end
+
 
 
   def get_user_input
