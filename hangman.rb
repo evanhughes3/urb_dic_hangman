@@ -1,22 +1,13 @@
-['f','a','r','t']
-
-
-#while guessedletters < 8 do
-#get user input - a letter
-#  check if that letter is in full_answer
-    #if it is then first its index position in full answer of the chosen letter
-    #find that index position in user answer, and add that letter at that posit
-    #else put the letter in guessed letter array
 
 class Hangman
   attr_reader :guessed_letters
 
-  def initialize(word, definition, example)
-    @full_answer = word.chars #['f','a','r','t']
+  def initialize(word_hash)
+    @full_answer = word_hash[:word].chars
     create_user_answer
     @guessed_letters = []
-    @definition = definition # ["To stink up the place"]
-    @example = example
+    @definition = word_hash[:definition]
+    @example = word_hash[:example]
   end
 
   def create_user_answer
@@ -28,6 +19,18 @@ class Hangman
 
   def get_user_input
     @user_input = gets.chomp.downcase
+    if @user_answer.include?(@user_input) || @guessed_letters.include?(@user_input)
+      puts "You already tried that letter!"
+      get_user_input
+    elsif @user_input.length > 1
+      puts "Please only enter one letter at a time"
+      get_user_input
+    elsif @user_input.match(/[a-z]/)
+      return @user_input
+    else
+      puts "Sorry you can only enter letters, please enter another letter"
+      get_user_input
+    end
   end
 
   def check_letter
@@ -41,8 +44,12 @@ class Hangman
   end
 
   def add_letter_to_user_answer
-    found_index = @full_answer.index(@user_input)
-    @user_answer[found_index] = @user_input
+    index_to_replace = []
+    @full_answer.each_with_index { |letter, index| letter == @user_input ? index_to_replace << index : letter}
+
+    index_to_replace.each do |index|
+     @user_answer[index] = @user_input
+    end
   end
 
   def game_over?
@@ -65,6 +72,8 @@ class Hangman
     puts "Example:     #{@example}"
     puts
   end
+
+
 
 end
 

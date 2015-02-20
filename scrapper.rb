@@ -25,4 +25,4 @@ def format!(url = 'http://www.urbandictionary.com/')
     create_hash_formatted_objects(word_objects_array)
 end
 
-format!
+format!.first

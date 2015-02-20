@@ -1,14 +1,25 @@
 require_relative 'view'
 require_relative 'hangman'
-
+require_relative './scrapper.rb'
 class Controller
 
-  def initialize
-    @game = Hangman.new('fart', "To stink up the place", "The DBC fridge smells like a fart.")
+  def initialize(formated_hashs)
+    @game = Hangman.new(formated_hashs)
+  end
+
+  def ask_to_play_again
+    puts "Would you like to play again? (y or n)"
+    user_answer = gets.chomp
+    if user_answer == "y"
+      Controller.new(format!.sample).play_game!
+    else
+      return
+    end
   end
 
   def play_game!
     View.clear_screen
+    View.welcome
     View.zero_wrong_guess
     @game.current_score
     until @game.game_over?
@@ -27,6 +38,7 @@ class Controller
       end
     end
     evaluate_outcome
+    ask_to_play_again
   end
 
   def evaluate_outcome
@@ -64,4 +76,4 @@ class Controller
 
 end
 
-Controller.new.play_game!
+Controller.new(format!.sample).play_game!
