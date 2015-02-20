@@ -110,17 +110,17 @@ def self.six_wrong_guess
 
  def self.zero_wrong_guess
    puts "
-             +------+
-             |      |
-             |      |
-             |      |
-                    |
-                    |
-                    |
-                    |
-                    |
-         ------------
-         ------------"
+          +------+
+          |      |
+          |      |
+          |      |
+                 |
+                 |
+                 |
+                 |
+                 |
+      ------------
+      ------------"
  end
 
  def self.you_lose
