@@ -4,7 +4,7 @@ require_relative 'hangman'
 class Controller
 
   def initialize
-    @game = Hangman.new('fart', "To stink up the place", "The DBC fridge smells like a fart.")
+    @game = Hangman.new('abc def', "To stink up the place", "The DBC fridge smells like a fart.")
   end
 
   def play_game!

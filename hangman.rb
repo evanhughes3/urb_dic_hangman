@@ -1,6 +1,6 @@
-['f','a','r','t']
+# ['f','a','r','t']
 
-
+require 'debugger'
 #while guessedletters < 8 do
 #get user input - a letter
 #  check if that letter is in full_answer
@@ -12,7 +12,7 @@ class Hangman
   attr_reader :guessed_letters
 
   def initialize(word, definition, example)
-    @full_answer = word.chars #['f','a','r','t']
+    p @full_answer = word.chars #['a','b','c', ' ', d']
     create_user_answer
     @guessed_letters = []
     @definition = definition # ["To stink up the place"]
@@ -21,8 +21,9 @@ class Hangman
 
   def create_user_answer
     @user_answer = []
-    @user_answer << "_" * @full_answer.length
-    @user_answer = @user_answer.join("").split("")
+    matches = @full_answer.join('').tr('[a-z]','_')
+    @user_answer << matches
+    @user_answer = @user_answer.first.split("")
   end
 
 
@@ -68,10 +69,10 @@ class Hangman
 
 end
 
-# test = Hangman.new('fart', "To stink up the place")
+# test = Hangman.new('abc def', "To stink up the place", "Here's an example")
 # # p test.check_letter
-# # p test.add_letter_to_guessed
-# # p test.add_letter_to_user_answer
+# p test.add_letter_to_guessed
+# p test.add_letter_to_user_answer
 # p test.welcome
 # p test.play_game!
 
@@ -80,3 +81,4 @@ end
 #   def game
 #   end
 # end
+
