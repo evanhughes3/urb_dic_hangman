@@ -3,6 +3,7 @@ require_relative 'hangman'
 require_relative './scrapper.rb'
 class Controller
 
+
   def initialize(formated_hashs)
     @game = Hangman.new(formated_hashs)
   end
@@ -15,6 +16,7 @@ class Controller
     else
       return
     end
+
   end
 
   def play_game!

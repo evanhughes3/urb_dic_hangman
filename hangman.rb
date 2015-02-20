@@ -1,6 +1,6 @@
-
 class Hangman
   attr_reader :guessed_letters
+
 
   def initialize(word_hash)
     @full_answer = word_hash[:word].chars
@@ -12,8 +12,9 @@ class Hangman
 
   def create_user_answer
     @user_answer = []
-    @user_answer << "_" * @full_answer.length
-    @user_answer = @user_answer.join("").split("")
+    matches = @full_answer.join('').tr('[a-z]','_')
+    @user_answer << matches
+    @user_answer = @user_answer.first.split("")
   end
 
 
@@ -77,10 +78,10 @@ class Hangman
 
 end
 
-# test = Hangman.new('fart', "To stink up the place")
+# test = Hangman.new('abc def', "To stink up the place", "Here's an example")
 # # p test.check_letter
-# # p test.add_letter_to_guessed
-# # p test.add_letter_to_user_answer
+# p test.add_letter_to_guessed
+# p test.add_letter_to_user_answer
 # p test.welcome
 # p test.play_game!
 
@@ -89,3 +90,4 @@ end
 #   def game
 #   end
 # end
+
