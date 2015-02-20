@@ -1,8 +1,5 @@
 ['f','a','r','t']
 
-# module View
-# #print at start of game welcome, empty hangman ascii art, Guessed letters, answer, definition
-# end
 
 #while guessedletters < 8 do
 #get user input - a letter
@@ -12,6 +9,7 @@
     #else put the letter in guessed letter array
 
 class Hangman
+  attr_reader :guessed_letters
 
   def initialize(word, definition)
     @full_answer = word.chars #['f','a','r','t']
@@ -25,8 +23,6 @@ class Hangman
     @user_answer << "_" * @full_answer.length
     @user_answer = @user_answer.join("").split("")
   end
-
-
 
 
   def get_user_input
@@ -44,12 +40,12 @@ class Hangman
   end
 
   def add_letter_to_user_answer
-    p found_index = @full_answer.index(@user_input)
-    p @user_answer[found_index] = @user_input
+    found_index = @full_answer.index(@user_input)
+    @user_answer[found_index] = @user_input
   end
 
   def game_over?
-    @guessed_letters.length >= 8 || @full_answer == @user_answer
+    @guessed_letters.length >= 6 || @full_answer == @user_answer
   end
 
   def play_game!
@@ -62,36 +58,24 @@ class Hangman
     end
     end
     puts "You won!"
-    welcome
   end
 
-  def welcome
-    puts "
-             +------+
-             |      |
-             |      |
-             |      |
-                    |
-                    |
-                    |
-                    |
-                    |
-         ------------
-         ------------"
-    puts
+  def current_score
+
     puts "Answer:   #{@user_answer.join(' ')} \n\n"
     puts "Guessed Letters:   #{@guessed_letters.join('  ')} \n\n"
     puts "Definition:   #{@definition} \n\n"
+    # puts "*"*50
   end
 
 end
 
-test = Hangman.new('fart', "To stink up the place")
-# p test.check_letter
-# p test.add_letter_to_guessed
-# p test.add_letter_to_user_answer
-p test.welcome
-p test.play_game!
+# test = Hangman.new('fart', "To stink up the place")
+# # p test.check_letter
+# # p test.add_letter_to_guessed
+# # p test.add_letter_to_user_answer
+# p test.welcome
+# p test.play_game!
 
 
 # module Controller
