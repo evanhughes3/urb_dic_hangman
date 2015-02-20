@@ -4,22 +4,39 @@ require_relative 'hangman'
 class Controller
 
   def initialize
-    @game = Hangman.new('fart', "To stink up the place")
+    @game = Hangman.new('fart', "To stink up the place", "The DBC fridge smells like a fart.")
   end
 
   def play_game!
+    View.clear_screen
     View.zero_wrong_guess
     @game.current_score
     until @game.game_over?
       if @game.check_letter
         @game.add_letter_to_user_answer
-        @game.current_score
+        View.clear_screen
         what_to_print
+        @game.current_score
+        View.correct_guess
       else
         @game.add_letter_to_guessed
-        @game.current_score
+        View.clear_screen
         what_to_print
+        @game.current_score
+        View.incorrect_guess
       end
+    end
+    evaluate_outcome
+  end
+
+  def evaluate_outcome
+    if @game.won?
+      View.clear_screen
+      @game.final_screen
+      View.you_win
+    else
+      View.you_lose
+      @game.final_screen
     end
   end
 

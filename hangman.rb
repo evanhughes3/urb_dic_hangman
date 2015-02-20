@@ -11,11 +11,12 @@
 class Hangman
   attr_reader :guessed_letters
 
-  def initialize(word, definition)
+  def initialize(word, definition, example)
     @full_answer = word.chars #['f','a','r','t']
     create_user_answer
     @guessed_letters = []
     @definition = definition # ["To stink up the place"]
+    @example = example
   end
 
   def create_user_answer
@@ -26,7 +27,7 @@ class Hangman
 
 
   def get_user_input
-    @user_input = gets.chomp
+    @user_input = gets.chomp.downcase
   end
 
   def check_letter
@@ -48,24 +49,21 @@ class Hangman
     @guessed_letters.length >= 6 || @full_answer == @user_answer
   end
 
-  def play_game!
-    until game_over?
-      welcome
-      if check_letter
-      add_letter_to_user_answer
-      else
-      add_letter_to_guessed
-    end
-    end
-    puts "You won!"
+  def won?
+    @full_answer == @user_answer
   end
 
   def current_score
-
     puts "Answer:   #{@user_answer.join(' ')} \n\n"
     puts "Guessed Letters:   #{@guessed_letters.join('  ')} \n\n"
     puts "Definition:   #{@definition} \n\n"
-    # puts "*"*50
+  end
+
+  def final_screen
+    puts "Answer:   #{@full_answer.join('')} \n\n"
+    puts "Definition:   #{@definition} \n\n"
+    puts "Example:     #{@example}"
+    puts
   end
 
 end
