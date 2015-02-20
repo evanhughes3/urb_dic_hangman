@@ -1,6 +1,12 @@
 module View
 
-def self.six_wrong_guess
+  def self.welcome
+    puts "Welcome to Slangman!"
+    puts "Fiddlers 2015"
+    puts "Created by Crabs: Evan, Peter C, and Jess"
+  end
+
+  def self.six_wrong_guess
     puts "
            +------+
            |      |
@@ -15,7 +21,7 @@ def self.six_wrong_guess
        ------------
        ------------
        "
-     end
+  end
 
 
 
@@ -35,28 +41,28 @@ def self.six_wrong_guess
        ------------
        ------------
        "
-     end
+  end
 
 
 
-      def self.four_wrong_guess
-        puts "
-           +------+
-           |      |
-           |      |
-          0       |
-         /  \\     |
-        / || \\    |
-          ||      |
-                  |
-                  |
-                  |
-       ------------
-       ------------
-       "
-     end
+  def self.four_wrong_guess
+    puts "
+       +------+
+       |      |
+       |      |
+      0       |
+     /  \\     |
+    / || \\    |
+      ||      |
+              |
+              |
+              |
+   ------------
+   ------------
+   "
+  end
 
-    def self.three_wrong_guess
+  def self.three_wrong_guess
       puts "
            +------+
            |      |
@@ -71,9 +77,9 @@ def self.six_wrong_guess
        ------------
        ------------
        "
-     end
+  end
 
-    def self.two_wrong_guess
+  def self.two_wrong_guess
       puts "
            +------+
            |      |
@@ -88,7 +94,7 @@ def self.six_wrong_guess
        ------------
        ------------
        "
-     end
+  end
 
   def self.one_wrong_guess
 
@@ -108,7 +114,7 @@ def self.six_wrong_guess
        "
   end
 
- def self.zero_wrong_guess
+  def self.zero_wrong_guess
    puts "
           +------+
           |      |
