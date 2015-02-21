@@ -1,6 +1,7 @@
-require_relative 'view'
-require_relative 'hangman'
-require_relative './scrapper.rb'
+require_relative '../views/view'
+require_relative '../models/hangman'
+require_relative '../../scrapper.rb'
+require_relative '../../config/environment'
 
 class Controller
 

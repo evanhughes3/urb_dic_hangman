@@ -13,12 +13,7 @@ APP_ROOT = Pathname.new(path_to_root_directory)
 
 
 # Load the files in APP_ROOT/app/models/
-model_files = Dir[APP_ROOT.join('app', 'models', '*.rb')]
-
-model_files.each do |model_file|
-  filename = File.basename(model_file, ".*")
-  autoload ActiveSupport::Inflector.camelize(filename), model_file
-end
+Dir[APP_ROOT + 'app/{models,controllers,views}/*.rb'].each{|path| require path}
 
 
 # Set up ActiveRecord::Base to log its activity
