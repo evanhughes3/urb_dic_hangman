@@ -43,6 +43,7 @@ class Controller
       end
     end
     evaluate_outcome  #calculate a score
+    puts
     ask_to_play_again
   end
 
@@ -58,14 +59,14 @@ class Controller
 
   def evaluate_outcome
     if @game.won?
-      Score.create(value: generated_score, user_id: @user.id)
-      puts generated_score
+      Score.create(value: generate_score, user_id: @user.id)
       View.clear_screen
       @game.final_screen
       View.you_win
     else
       View.you_lose
       @game.final_screen
+      Score.create(value: generate_score, user_id: @user.id)
     end
   end
 
@@ -92,5 +93,3 @@ class Controller
   end
 
 end
-
-Controller.new(format!.sample).play_game!
