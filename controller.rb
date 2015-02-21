@@ -1,11 +1,15 @@
 require_relative 'view'
 require_relative 'hangman'
 require_relative './scrapper.rb'
+require_relative
+
 class Controller
 
   def initialize(formated_hashs)
     @game = Hangman.new(formated_hashs)
   end
+
+  #@user = User.create(name: @name_user_input)
 
   def ask_to_play_again
     puts "Would you like to play again? (y or n)"
@@ -20,6 +24,7 @@ class Controller
   def play_game!
     View.clear_screen
     View.welcome
+    create_user
     View.zero_wrong_guess
     @game.current_score
     until @game.game_over?
@@ -37,12 +42,24 @@ class Controller
         View.incorrect_guess
       end
     end
-    evaluate_outcome
+    evaluate_outcome  #calculate a score
     ask_to_play_again
+  end
+
+  def create_user
+    puts "What is your username?"
+    current_user = gets.chomp
+    @user = User.create(name: current_user)
+  end
+
+  def generate_score
+    10 - (@game.guessed_letters.length)
   end
 
   def evaluate_outcome
     if @game.won?
+      Score.create(value: generated_score, user_id: @user.id)
+      puts generated_score
       View.clear_screen
       @game.final_screen
       View.you_win

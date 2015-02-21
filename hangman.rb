@@ -18,7 +18,6 @@ class Hangman
   end
 
 
-
   def get_user_input
     @user_input = gets.chomp.downcase
     if @user_answer.include?(@user_input) || @guessed_letters.include?(@user_input)
