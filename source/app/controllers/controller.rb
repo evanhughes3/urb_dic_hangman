@@ -34,12 +34,14 @@ class Controller
         what_to_print
         @game.current_score
         View.correct_guess
+        print_score
       else
         @game.add_letter_to_guessed
         View.clear_screen
         what_to_print
         @game.current_score
         View.incorrect_guess
+        print_score
       end
     end
     evaluate_outcome  #calculate a score
@@ -68,6 +70,10 @@ class Controller
       @game.final_screen
       Score.create(value: generate_score, user_id: @user.id)
     end
+  end
+
+  def print_score
+    puts "Your score is " + generate_score.to_s + "!"
   end
 
   def what_to_print
