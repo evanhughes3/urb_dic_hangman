@@ -174,6 +174,8 @@ module View
 "
  end
 
+
+
  def self.correct_guess
   puts "Nice! You got one!"
   puts

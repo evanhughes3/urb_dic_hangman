@@ -1,4 +1,5 @@
 
+
 class Hangman
   attr_reader :guessed_letters
 

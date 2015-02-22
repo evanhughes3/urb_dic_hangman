@@ -1,6 +1,7 @@
-require_relative 'view'
-require_relative 'hangman'
-require_relative './scrapper.rb'
+require_relative '../views/view'
+require_relative '../models/hangman'
+require_relative '../../scrapper.rb'
+require_relative '../../config/environment'
 
 class Controller
 
@@ -33,15 +34,18 @@ class Controller
         what_to_print
         @game.current_score
         View.correct_guess
+        print_score
       else
         @game.add_letter_to_guessed
         View.clear_screen
         what_to_print
         @game.current_score
         View.incorrect_guess
+        print_score
       end
     end
     evaluate_outcome  #calculate a score
+    puts
     ask_to_play_again
   end
 
@@ -57,15 +61,19 @@ class Controller
 
   def evaluate_outcome
     if @game.won?
-      Score.create(value: generated_score, user_id: @user.id)
-      puts generated_score
+      Score.create(value: generate_score, user_id: @user.id)
       View.clear_screen
       @game.final_screen
       View.you_win
     else
       View.you_lose
       @game.final_screen
+      Score.create(value: generate_score, user_id: @user.id)
     end
+  end
+
+  def print_score
+    puts "Your score is " + generate_score.to_s + "!"
   end
 
   def what_to_print
@@ -91,5 +99,3 @@ class Controller
   end
 
 end
-
-Controller.new(format!.sample).play_game!
